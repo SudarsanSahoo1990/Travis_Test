@@ -1,4 +1,16 @@
-language: node_js
-node_js:
-- "6.1"
-script: "mocha test.js"
+{
+  "sudo": "required",
+  "services": [
+    "docker"
+  ],
+  "script": [
+    "docker build -t zokeber/mongodb:latest .",
+    "docker run -d -p 27017:27017 --name mongodb zokeber/mongodb",
+    "docker ps -a"
+  ],
+  "global_env": "DOCKER_VERSION=1.9.1",
+  "language": "ruby",
+  "group": "stable",
+  "dist": "trusty",
+  "os": "linux"
+}
