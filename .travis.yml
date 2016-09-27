@@ -9,5 +9,5 @@ install:
   - mkdir -p iotaccdb
   - mongod --dbpath=iotaccdb &
   - sleep 3
-script:
+script:"mocha test"
   - mongo --eval 'db.hostInfo()'
