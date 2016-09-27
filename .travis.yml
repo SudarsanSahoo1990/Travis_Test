@@ -1,16 +1,13 @@
-{
-  "sudo": "required",
-  "services": [
-    "docker"
-  ],
-  "script": [
-    "docker build -t zokeber/mongodb:latest .",
-    "docker run -d -p 27017:27017 --name mongodb zokeber/mongodb",
-    "docker ps -a"
-  ],
-  "global_env": "DOCKER_VERSION=1.9.1",
-  "language": "ruby",
-  "group": "stable",
-  "dist": "trusty",
-  "os": "linux"
-}
+sudo: false
+env:
+  global:
+    - MONGODB_VERSION=2.6.10
+install:
+  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
+  - tar xfz mongodb-linux-x86_64-$MONGODB_VERSION.tgz
+  - export PATH=`pwd`/mongodb-linux-x86_64-$MONGODB_VERSION/bin:$PATH
+  - mkdir -p iotaccdb
+  - mongod --dbpath=iotaccdb &
+  - sleep 3
+script:
+  - mongo --eval 'db.hostInfo()'
