@@ -7,5 +7,5 @@
 // connect.then(function(){
 //     console.log('connected');
 // })
-
+var app = require('./app.js')
 console.log("Ennnnnnnnnnnnnnnnnnn"+process.env.NODE_ENV)
