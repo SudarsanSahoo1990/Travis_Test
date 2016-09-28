@@ -1,14 +1,6 @@
-sudo: false
-env:
-  global:
-    - MONGODB_VERSION=2.6.10
-install:
-  - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
-  - tar xfz mongodb-linux-x86_64-$MONGODB_VERSION.tgz
-  - export PATH=`pwd`/mongodb-linux-x86_64-$MONGODB_VERSION/bin:$PATH
-  - mkdir -p iotaccdb
-  - mongod --dbpath=iotaccdb &
-  - sleep 3
-script:
-  - mocha test
-  - mongo --eval 'db.hostInfo()'
+language: node_js
+node_js:
+- "6.1"
+script: "mocha test.js"
+env :
+    -NODE_ENV = test
